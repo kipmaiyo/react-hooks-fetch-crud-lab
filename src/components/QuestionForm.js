@@ -1,6 +1,7 @@
+
 import React, { useState } from "react";
 
-function QuestionForm(props) {
+function QuestionForm({ addQ }) {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -16,10 +17,22 @@ function QuestionForm(props) {
       [event.target.name]: event.target.value,
     });
   }
-
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    const prompt = formData.prompt;
+    const answer = [
+      formData.answer1,
+      formData.answer2,
+      formData.answer3,
+      formData.answer4,
+    ];
+    const correctI = formData.correctIndex;
+    const nQ = {
+      prompt: prompt,
+      answers: answer,
+      correctIndex: correctI,
+    };
+    addQ(nQ);
   }
 
   return (
